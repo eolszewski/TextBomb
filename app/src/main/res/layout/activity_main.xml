@@ -1,0 +1,89 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="30dp">
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Text Bomb"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="30dp"
+            android:textStyle="bold"
+            android:typeface="serif"
+            android:textSize="46sp"
+            android:layout_marginTop="20dp" />
+
+        <TextView
+            android:id="@+id/textViewPhoneNo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/phone_label"
+            android:layout_below="@+id/title" />
+
+        <EditText
+            android:id="@+id/editTextPhoneNo"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:inputType="phone"
+            android:layout_below="@+id/textViewPhoneNo"
+            android:layout_alignParentLeft="true" />
+
+        <TextView
+            android:id="@+id/textViewMessage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/sms_label"
+            android:layout_below="@+id/editTextPhoneNo"
+            android:layout_alignParentLeft="true" />
+
+        <EditText
+            android:id="@+id/editTextSMS"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textMultiLine"
+            android:layout_below="@+id/textViewMessage"
+            android:layout_alignParentLeft="true" />
+
+        <TextView
+            android:id="@+id/textViewNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/number"
+            android:layout_below="@+id/editTextSMS"
+            android:layout_alignParentLeft="true" />
+
+        <EditText
+            android:id="@+id/editTextNumber"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:layout_below="@+id/textViewNumber"
+            android:layout_alignParentLeft="true" />
+
+        <Button android:id="@+id/btnSendSMS"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/send_sms_label"
+            android:layout_below="@+id/editTextNumber"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+            android:id="@+id/author"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/author"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true" />
+
+    </RelativeLayout>
+
+</LinearLayout>
