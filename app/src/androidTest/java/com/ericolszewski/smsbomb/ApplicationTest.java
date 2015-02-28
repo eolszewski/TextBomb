@@ -1,4 +1,4 @@
-package com.example.ericolszewski.smsbomb;
+package com.ericolszewski.smsbomb;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;
