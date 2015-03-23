@@ -1,0 +1,118 @@
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:fillViewport="true" >
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#FFFFFF"
+        android:orientation="vertical"
+        android:padding="30dip" >
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="@string/send_sms_bomb_header"
+            android:id="@+id/textView"
+            android:gravity="center"
+            android:layout_marginBottom="15dip" />
+
+        <LinearLayout
+            android:id="@+id/phoneNumberLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/editTextPhoneNumber"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:inputType="phone"
+                android:background="@drawable/tb_edittext_background"
+                android:minHeight="40dip"
+                android:layout_marginRight="15dip"
+                android:hint="@string/phone_number_placeholder" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/browse_label"
+                android:id="@+id/buttonBrowse"
+                android:background="@drawable/tb_button_background"
+                android:textColor="@drawable/tb_button_text_color"
+                android:minHeight="40dip"/>
+
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/editTextMessage"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textMultiLine"
+            android:layout_marginTop="15dip"
+            android:gravity="top"
+            android:background="@drawable/tb_edittext_background"
+            android:minHeight="40dip"
+            android:hint="@string/message_placeholder"
+            android:singleLine="false"
+            android:lines="4"/>
+
+        <EditText
+            android:id="@+id/editTextNumber"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:layout_marginTop="15dip"
+            android:background="@drawable/tb_edittext_background"
+            android:minHeight="40dip"
+            android:hint="@string/number_placeholder"/>
+
+        <LinearLayout
+            android:id="@+id/intervalLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dip">
+
+            <EditText
+                android:id="@+id/editTextInterval"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:inputType="phone"
+                android:background="@drawable/tb_edittext_background"
+                android:minHeight="40dip"
+                android:layout_marginRight="15dip"
+                android:hint="@string/interval_placeholder"
+                android:clickable="false"
+                android:cursorVisible="false"
+                android:focusable="false"
+                android:focusableInTouchMode="false" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/interval_label"
+                android:id="@+id/buttonInterval"
+                android:background="@drawable/tb_button_background"
+                android:textColor="@drawable/tb_button_text_color"
+                android:minHeight="40dip"/>
+
+        </LinearLayout>
+
+        <Button android:id="@+id/buttonSendMessages"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/send_sms_label"
+            android:background="@drawable/tb_button_background"
+            android:textColor="@drawable/tb_button_text_color"
+            android:layout_marginTop="15dip"/>
+
+    </LinearLayout>
+
+</ScrollView>
