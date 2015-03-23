@@ -9,6 +9,7 @@
     <string name="send_sms_label">Send Texts</string>
     <string name="browse_label">Browse</string>
     <string name="interval_label">Set Frequency</string>
+    <string name="anonymous_text_label">Send Text Anonymously</string>
     <string name="interval_placeholder">Frequency</string>
 
 </resources>

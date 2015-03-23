@@ -115,6 +115,14 @@
             android:textColor="@drawable/tb_button_text_color"
             android:layout_marginTop="15dip"/>
 
+        <Button android:id="@+id/buttonAnonymousText"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/anonymous_text_label"
+            android:background="@drawable/tb_button_background"
+            android:textColor="@drawable/tb_button_text_color"
+            android:layout_marginTop="15dip"/>
+
     </LinearLayout>
 
 </ScrollView>
