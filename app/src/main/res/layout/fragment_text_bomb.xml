@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:background="#FFFFFF"
         android:orientation="vertical"
-        android:padding="30dip" >
+        android:padding="@dimen/linear_layout_padding" >
 
         <TextView
             android:layout_width="fill_parent"
@@ -19,7 +19,7 @@
             android:text="@string/send_sms_bomb_header"
             android:id="@+id/textView"
             android:gravity="center"
-            android:layout_marginBottom="15dip" />
+            android:layout_marginBottom="@dimen/text_view_padding_bottom" />
 
         <LinearLayout
             android:id="@+id/phoneNumberLayout"
@@ -33,8 +33,8 @@
                 android:layout_weight="1"
                 android:inputType="phone"
                 android:background="@drawable/tb_edittext_background"
-                android:minHeight="40dip"
-                android:layout_marginRight="15dip"
+                android:minHeight="@dimen/element_min_height"
+                android:layout_marginRight="@dimen/edit_text_margin_right"
                 android:hint="@string/phone_number_placeholder" />
 
             <Button
@@ -45,7 +45,7 @@
                 android:id="@+id/buttonBrowse"
                 android:background="@drawable/tb_button_background"
                 android:textColor="@drawable/tb_button_text_color"
-                android:minHeight="40dip"/>
+                android:minHeight="@dimen/element_min_height"/>
 
         </LinearLayout>
 
@@ -54,10 +54,10 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:inputType="textMultiLine"
-            android:layout_marginTop="15dip"
+            android:layout_marginTop="@dimen/edit_text_margin_top"
             android:gravity="top"
             android:background="@drawable/tb_edittext_background"
-            android:minHeight="40dip"
+            android:minHeight="@dimen/element_min_height"
             android:hint="@string/message_placeholder"
             android:singleLine="false"
             android:lines="4"/>
@@ -67,16 +67,16 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:inputType="number"
-            android:layout_marginTop="15dip"
+            android:layout_marginTop="@dimen/edit_text_margin_top"
             android:background="@drawable/tb_edittext_background"
-            android:minHeight="40dip"
+            android:minHeight="@dimen/element_min_height"
             android:hint="@string/number_placeholder"/>
 
         <LinearLayout
             android:id="@+id/intervalLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dip">
+            android:layout_marginTop="@dimen/linear_layout_margin_bottom">
 
             <EditText
                 android:id="@+id/editTextInterval"
@@ -85,8 +85,8 @@
                 android:layout_weight="1"
                 android:inputType="phone"
                 android:background="@drawable/tb_edittext_background"
-                android:minHeight="40dip"
-                android:layout_marginRight="15dip"
+                android:minHeight="@dimen/element_min_height"
+                android:layout_marginRight="@dimen/edit_text_margin_right"
                 android:hint="@string/interval_placeholder"
                 android:clickable="false"
                 android:cursorVisible="false"
@@ -101,7 +101,7 @@
                 android:id="@+id/buttonInterval"
                 android:background="@drawable/tb_button_background"
                 android:textColor="@drawable/tb_button_text_color"
-                android:minHeight="40dip"/>
+                android:minHeight="@dimen/element_min_height"/>
 
         </LinearLayout>
 
@@ -111,7 +111,7 @@
             android:text="@string/send_sms_label"
             android:background="@drawable/tb_button_background"
             android:textColor="@drawable/tb_button_text_color"
-            android:layout_marginTop="15dip"/>
+            android:layout_marginTop="@dimen/button_margin_top"/>
 
     </LinearLayout>
 

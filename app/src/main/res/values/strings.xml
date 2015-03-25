@@ -3,17 +3,19 @@
 
     <string name="action_settings">Settings</string>
     <string name="app_name">Text Bomb</string>
+    <string name="browse_label">Contacts</string>
+    <string name="interval_label">Set Frequency</string>
+    <string name="interval_placeholder">Frequency</string>
+    <string name="message_placeholder">Message</string>
+    <string name="message_type">Select the type of message you want to fake.</string>
     <string name="number_placeholder"># of Messages</string>
     <string name="phone_number_placeholder">Phone Number</string>
-    <string name="message_placeholder">Message</string>
-    <string name="send_sms_label">Send Texts</string>
-    <string name="send_fake_sms_label">Send Text</string>
     <string name="send_fake_sms_header">Make whoever you want text you whatever you want!</string>
+    <string name="send_fake_sms_label">Fake</string>
     <string name="send_sms_bomb_header">Send as many texts as you want to someone!</string>
-    <string name="browse_label">Browse</string>
-    <string name="interval_label">Set Frequency</string>
-    <string name="anonymous_text_label">Send Text Anonymously</string>
-    <string name="interval_placeholder">Frequency</string>
+    <string name="send_sms_label">Send Texts</string>
+    <string name="set_date_and_time">Set Date and Time</string>
+    <string name="text_view_fake_message_header">The message you type above will not be sent to anyone. You will just receive it instantly on your phone. You may need to refresh your default messaging app to see the texts.</string>
 
     <string-array name="tabs">
         <item>TEXT BOMB</item>

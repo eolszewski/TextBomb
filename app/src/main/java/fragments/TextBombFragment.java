@@ -30,11 +30,10 @@ import com.ericolszewski.smsbomb.R;
 public class TextBombFragment extends Fragment {
 
     //region Class Variables
-    private static final int REQUEST_CONTACTPICKER = 1, SEND_ANONYMOUS_TEXT = 2;
-    Button sendSMSButton, browseContactsButton, setIntervalButton, anonymousTextButton;
+    private static final int REQUEST_CONTACTPICKER = 1;
+
+    Button sendSMSButton, browseContactsButton, setIntervalButton;
     EditText phoneNumberEditText, messageEditText, quantityEditText, intervalEditText;
-    Context context;
-    String defaultSmsApp;
     //endregion
 
     public static TextBombFragment getInstance(int position) {
@@ -52,7 +51,6 @@ public class TextBombFragment extends Fragment {
         if (bundle != null) {
             sendSMSButton = (Button) layout.findViewById(R.id.buttonSendMessages);
             browseContactsButton = (Button) layout.findViewById(R.id.buttonBrowse);
-//            anonymousTextButton = (Button) layout.findViewById(R.id.buttonAnonymousText);
             setIntervalButton = (Button) layout.findViewById(R.id.buttonInterval);
             phoneNumberEditText = (EditText) layout.findViewById(R.id.editTextPhoneNumber);
             messageEditText = (EditText) layout.findViewById(R.id.editTextMessage);
@@ -81,63 +79,6 @@ public class TextBombFragment extends Fragment {
         return layout;
 
     }
-
-//    //region View Creation
-//    @TargetApi(Build.VERSION_CODES.KITKAT)
-//    @Override
-//    protected void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//        setContentView(R.layout.fragment_text_bomb);
-//
-//        sendSMSButton = (Button) findViewById(R.id.buttonSendMessages);
-//        browseContactsButton = (Button) findViewById(R.id.buttonBrowse);
-//        anonymousTextButton = (Button) findViewById(R.id.buttonAnonymousText);
-//        setIntervalButton = (Button) findViewById(R.id.buttonInterval);
-//        phoneNumberEditText = (EditText) findViewById(R.id.editTextPhoneNumber);
-//        messageEditText = (EditText) findViewById(R.id.editTextMessage);
-//        quantityEditText = (EditText) findViewById(R.id.editTextNumber);
-//        intervalEditText = (EditText) findViewById(R.id.editTextInterval);
-//
-//        context = this;
-//
-//        defaultSmsApp = Telephony.Sms.getDefaultSmsPackage(context);
-//
-//        sendSMSButton.setOnClickListener(new View.OnClickListener() {
-//            public void onClick(View view) {
-//                sendSMSMessage();
-//            }
-//        });
-//        browseContactsButton.setOnClickListener(new View.OnClickListener() {
-//            public void onClick(View view) {
-//                selectContact();
-//            }
-//        });
-//        setIntervalButton.setOnClickListener(new View.OnClickListener() {
-//            public void onClick(View view) {
-//                CustomTimePickerDialog timePickerDialog = new CustomTimePickerDialog(TextBombFragment.this, timeSetListener, 0, 0, true);
-//                timePickerDialog.setTitle("Set minutes and seconds");
-//                timePickerDialog.show();
-//            }
-//        });
-//
-//        anonymousTextButton.setOnClickListener(new View.OnClickListener() {
-//            @TargetApi(Build.VERSION_CODES.KITKAT)
-//            public void onClick(View v) {
-//
-//                final String myPackageName = getPackageName();
-//                if (!Telephony.Sms.getDefaultSmsPackage(context).equals(myPackageName)) {
-//
-//                    //Change the default sms app to my app
-//                    Intent intent = new Intent(Telephony.Sms.Intents.ACTION_CHANGE_DEFAULT);
-//                    intent.putExtra(Telephony.Sms.Intents.EXTRA_PACKAGE_NAME, context.getPackageName());
-//                    startActivityForResult(intent, SEND_ANONYMOUS_TEXT);
-//                } else {
-//                    WriteSms("hey", "7138258982");
-//                }
-//            }
-//        });
-//    }
-//    //endregion
 
     //region Overwritten Methods
     @TargetApi(Build.VERSION_CODES.KITKAT)
@@ -170,58 +111,8 @@ public class TextBombFragment extends Fragment {
                 }
             }
         }
-//        if (requestCode == SEND_ANONYMOUS_TEXT)
-//        {
-//            if(resultCode == RESULT_OK)
-//            {
-//                final String myPackageName = getPackageName();
-//                if (Telephony.Sms.getDefaultSmsPackage(context).equals(myPackageName)) {
-//
-//                    //Write to the default sms app
-//                    WriteSms("hey", "7133646652");
-//                }
-//            }
-//        }
     }
-
-//    //Write to the default sms app
-//    @TargetApi(Build.VERSION_CODES.KITKAT)
-//    private void WriteSms(String message, String phoneNumber) {
-//
-//        phoneNumber = phoneNumberEditText.getText().toString();
-//        String optionalPlus = phoneNumber.substring(0, 1);
-//        String sanitizedPhoneNumber = phoneNumber.replaceAll("[^\\d.]", "");
-//        if (optionalPlus.equals("+")) {
-//            sanitizedPhoneNumber = String.format("+%s", sanitizedPhoneNumber);
-//        }
-//
-//        //Put content values
-//        ContentValues values = new ContentValues();
-//        values.put(Telephony.Sms.ADDRESS, phoneNumber);
-//        values.put(Telephony.Sms.DATE, System.currentTimeMillis());
-//        values.put(Telephony.Sms.BODY, phoneNumberEditText.getText().toString());
-//        values.put(Telephony.Sms.CREATOR, sanitizedPhoneNumber);
-//
-//        //Insert the message
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-//            context.getContentResolver().insert(Telephony.Sms.Sent.CONTENT_URI, values);
-//        }
-//        else {
-//            context.getContentResolver().insert(Uri.parse("content://sms/sent"), values);
-//        }
-//
-//        //Change my sms app to the last default sms
-//        Intent intent = new Intent(Telephony.Sms.Intents.ACTION_CHANGE_DEFAULT);
-//        intent.putExtra(Telephony.Sms.Intents.EXTRA_PACKAGE_NAME, defaultSmsApp);
-//        context.startActivity(intent);
-//    }
-
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        getActivity().getMenuInflater().inflate(R.menu.menu_main, menu);
-//        return true;
-//    }
-//    //endregion
+    //endregion
 
     //region View Methods
     // Method for launching contact picker
@@ -331,6 +222,11 @@ public class TextBombFragment extends Fragment {
         }
 
         protected void onPostExecute(Long result) {
+            try {
+                Thread.sleep(10000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
             progressDialog.dismiss();
             Toast.makeText(getActivity(), "Texts are being sent.",
                     Toast.LENGTH_LONG).show();
