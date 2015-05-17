@@ -91,19 +91,17 @@
                         android:checked="true" />
 
                     <RadioButton
-                        android:id="@+id/radioButtonOutbox"
+                        android:id="@+id/radioButtonSent"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Outbox"
-                        android:visibility="gone"/>
+                        android:text="Sent" />
 
                     <RadioButton
                         android:id="@+id/radioButtonDraft"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Draft"
-                        android:checked="true"
-                        android:visibility="gone" />
+                        android:checked="true" />
 
                 </RadioGroup>
 
@@ -115,24 +113,22 @@
                     android:layout_centerInParent="true">
 
                     <RadioButton
-                        android:id="@+id/radioButtonSent"
+                        android:id="@+id/radioButtonOutbox"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Sent" />
+                        android:text="Outbox" />
 
                     <RadioButton
                         android:id="@+id/radioButtonFailed"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Failed"
-                        android:visibility="gone" />
+                        android:text="Failed" />
 
                     <RadioButton
                         android:id="@+id/radioButtonQueued"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Queued"
-                        android:visibility="gone" />
+                        android:text="Queued" />
 
                 </RadioGroup>
 
