@@ -32,7 +32,7 @@
 
             <Button
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="fill_parent"
                 android:layout_weight="1"
                 android:text="@string/browse_label"
                 android:id="@+id/buttonBrowse"

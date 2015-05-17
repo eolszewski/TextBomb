@@ -39,13 +39,13 @@
 
             <Button
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="fill_parent"
                 android:layout_weight="1"
                 android:text="@string/browse_label"
                 android:id="@+id/buttonBrowse"
                 android:background="@drawable/tb_button_background"
                 android:textColor="@drawable/tb_button_text_color"
-                android:minHeight="@dimen/element_min_height"/>
+                android:minHeight="@dimen/element_min_height" />
 
         </LinearLayout>
 
@@ -95,13 +95,15 @@
 
             <Button
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="fill_parent"
                 android:layout_weight="1"
                 android:text="@string/interval_label"
                 android:id="@+id/buttonInterval"
                 android:background="@drawable/tb_button_background"
                 android:textColor="@drawable/tb_button_text_color"
-                android:minHeight="@dimen/element_min_height"/>
+                android:minHeight="@dimen/element_min_height"
+                android:elegantTextHeight="false"
+                android:focusable="false" />
 
         </LinearLayout>
 
