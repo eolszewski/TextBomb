@@ -1,7 +1,9 @@
 package fragments;
 
 import android.annotation.TargetApi;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
@@ -59,7 +61,27 @@ public class TextBombFragment extends Fragment {
 
             sendSMSButton.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View view) {
-                    sendSMSMessage();
+                    if (quantityEditText.getText().toString().trim().length() != 0 && Integer.parseInt(quantityEditText.getText().toString()) > 50) {
+                        AlertDialog alertDialog = new AlertDialog.Builder(getActivity()).create();
+                        alertDialog.setTitle("Warning");
+                        alertDialog.setMessage("Sending this many messages may break your phone's ability to text for a few hours.");
+                        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        sendSMSMessage();
+                                    }
+                                });
+                        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "CANCEL",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        dialog.dismiss();
+                                    }
+                                });
+                        alertDialog.show();
+                    }
+                    else {
+                        sendSMSMessage();
+                    }
                 }
             });
             browseContactsButton.setOnClickListener(new View.OnClickListener() {
