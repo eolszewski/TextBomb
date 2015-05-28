@@ -7,6 +7,7 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarActivity;
 
+import fragments.ScheduleTextFragment;
 import fragments.TextBombFragment;
 import fragments.FakeTextFragment;
 import it.neokree.materialtabs.MaterialTab;
@@ -71,14 +72,17 @@ public class MainActivity extends ActionBarActivity implements MaterialTabListen
             if (position == 0) {
                 return TextBombFragment.getInstance(position);
             }
-            else {
+            else if (position == 1) {
                 return FakeTextFragment.getInstance(position);
+            }
+            else {
+                return ScheduleTextFragment.getInstance(position);
             }
         }
 
         @Override
         public int getCount() {
-            return 2;
+            return 3;
         }
 
         @Override

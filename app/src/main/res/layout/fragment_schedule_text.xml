@@ -1,0 +1,42 @@
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:fillViewport="true"
+    tools:context=".ScheduleTextFragment" >
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#FFFFFF"
+        android:orientation="vertical"
+        android:padding="@dimen/linear_layout_padding"
+        android:weightSum="1">
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="@string/schedule_text_header"
+            android:id="@+id/comingSoon"
+            android:gravity="center"
+            android:layout_marginBottom="@dimen/text_view_padding_bottom" />
+
+        <ListView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/listView" />
+
+        <Button android:id="@+id/buttonAddText"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/add_sms_label"
+            android:background="@drawable/tb_button_background"
+            android:textColor="@drawable/tb_button_text_color"
+            android:layout_marginTop="@dimen/button_margin_top"/>
+
+    </LinearLayout>
+
+</ScrollView>

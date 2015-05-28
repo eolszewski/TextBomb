@@ -2,6 +2,7 @@
 <resources>
 
     <string name="action_settings">Settings</string>
+    <string name="add_sms_label">Add Text</string>
     <string name="app_name">Text Bomb</string>
     <string name="browse_label">Contacts</string>
     <string name="interval_label">Set Frequency</string>
@@ -10,6 +11,7 @@
     <string name="message_type">Select the type of message you want to fake.</string>
     <string name="number_placeholder"># of Messages</string>
     <string name="phone_number_placeholder">Phone Number</string>
+    <string name="schedule_text_header">Coming Soon!</string>
     <string name="send_fake_sms_header">Make whoever you want text you whatever you want!</string>
     <string name="send_fake_sms_label">Fake</string>
     <string name="send_sms_bomb_header">Send as many texts as you want to someone!</string>
@@ -20,6 +22,7 @@
     <string-array name="tabs">
         <item>TEXT BOMB</item>
         <item>FAKE TEXT</item>
+        <item>SCHEDULE TEXT</item>
     </string-array>
 
 </resources>
