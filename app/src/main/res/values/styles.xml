@@ -6,4 +6,12 @@
         <item name="windowActionBar">false</item>
     </style>
 
+    <!-- Popup window theme. -->
+    <style name="AppTheme.PopupTheme" >
+        <item name="windowActionBar">false</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowCloseOnTouchOutside">true</item>
+    </style>
+
+
 </resources>

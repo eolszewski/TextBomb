@@ -7,9 +7,12 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarActivity;
 
+import com.google.android.gms.analytics.GoogleAnalytics;
+import com.google.android.gms.analytics.Tracker;
+
+import fragments.FakeTextFragment;
 import fragments.ScheduleTextFragment;
 import fragments.TextBombFragment;
-import fragments.FakeTextFragment;
 import it.neokree.materialtabs.MaterialTab;
 import it.neokree.materialtabs.MaterialTabHost;
 import it.neokree.materialtabs.MaterialTabListener;
@@ -18,6 +21,8 @@ import it.neokree.materialtabs.MaterialTabListener;
  * Created by ericolszewski on 3/22/15.
  */
 public class MainActivity extends ActionBarActivity implements MaterialTabListener {
+    public static GoogleAnalytics analytics;
+    public static Tracker tracker;
 
     private MaterialTabHost tabHost;
     private ViewPager viewPager;
@@ -26,6 +31,14 @@ public class MainActivity extends ActionBarActivity implements MaterialTabListen
     protected void onCreate(Bundle savedInstance) {
         super.onCreate(savedInstance);
         setContentView(R.layout.activity_main);
+
+        analytics = GoogleAnalytics.getInstance(this);
+        analytics.setLocalDispatchPeriod(1800);
+
+        tracker = analytics.newTracker("UA-63547520-1");
+        tracker.enableExceptionReporting(true);
+        tracker.enableAdvertisingIdCollection(true);
+        tracker.enableAutoActivityTracking(true);
 
         tabHost = (MaterialTabHost) findViewById(R.id.materialTabHost);
         viewPager = (ViewPager) findViewById(R.id.viewPager);

@@ -1,7 +1,6 @@
 package fragments;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -13,6 +12,8 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.ericolszewski.smsbomb.DatabaseAdapter;
+import com.ericolszewski.smsbomb.MessageActivity;
 import com.ericolszewski.smsbomb.R;
 
 import java.text.ParseException;
@@ -32,6 +33,7 @@ public class ScheduleTextFragment extends Fragment {
     private ArrayList<Message> messages = new ArrayList<Message>();
     private View layout;
     private LayoutInflater inflater;
+    private DatabaseAdapter databaseAdapter;
     //endregion
 
     public static ScheduleTextFragment getInstance(int position) {
@@ -54,18 +56,12 @@ public class ScheduleTextFragment extends Fragment {
 
             addSMSButton.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View view) {
-                AlertDialog alertDialog = new AlertDialog.Builder(getActivity()).create();
-                alertDialog.setTitle("Coming Soon");
-                alertDialog.setMessage("This feature will be available by June 14th, if you'd like to make suggestions for this feature, please email me (my information can be found in the Play Store for this app).");
-                alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "OK",
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.dismiss();
-                            }
-                        });
-                alertDialog.show();
+                    startActivity(new Intent(getActivity(), MessageActivity.class));
                 }
             });
+
+//            databaseAdapter = new DatabaseAdapter(getActivity());
+//            databaseAdapter.open();
         }
 
         return layout;
@@ -144,6 +140,11 @@ public class ScheduleTextFragment extends Fragment {
 
             return messageView;
         }
+    }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+//        databaseAdapter.close();
     }
 }
