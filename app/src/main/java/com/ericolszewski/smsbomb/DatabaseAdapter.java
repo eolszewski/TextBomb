@@ -18,16 +18,18 @@ public class DatabaseAdapter {
     public static final String KEY_ROWID = "_id";
     public static final String KEY_TEXT  = "text";
     public static final String KEY_DATE = "date";
+    public static final String KEY_UPDATED_AT = "updated_at";
     public static final String KEY_RECIPIENTS = "recipients";
     public static final String KEY_FREQUENCY = "frequency";
 
     public static final int COL_ROWID = 0;
     public static final int COL_TEXT = 1;
     public static final int COL_DATE = 2;
-    public static final int COL_RECIPIENTS = 3;
-    public static final int COL_FREQUENCY = 4;
+    public static final int COL_UPDATED_AT = 3;
+    public static final int COL_RECIPIENTS = 4;
+    public static final int COL_FREQUENCY = 5;
 
-    public static final String[] ALL_KEYS = new String[] {KEY_ROWID, KEY_TEXT, KEY_DATE, KEY_RECIPIENTS, KEY_FREQUENCY};
+    public static final String[] ALL_KEYS = new String[] {KEY_ROWID, KEY_TEXT, KEY_DATE, KEY_UPDATED_AT, KEY_RECIPIENTS, KEY_FREQUENCY};
     //endregion
 
     //region Database Information
@@ -42,6 +44,7 @@ public class DatabaseAdapter {
                     + " (" + KEY_ROWID + " integer primary key autoincrement, "
                     + KEY_TEXT + " text not null, "
                     + KEY_DATE + " text not null, "
+                    + KEY_UPDATED_AT + " text not null, "
                     + KEY_RECIPIENTS + " text not null, "
                     + KEY_FREQUENCY + " text not null"
                     + ");";
@@ -69,11 +72,12 @@ public class DatabaseAdapter {
     }
 
     // Add a new set of values to the database.
-    public long insertRow(String text, String date, String recipients, String frequency) {
+    public long insertRow(String text, String date, String updatedAt, String recipients, String frequency) {
         // Create row's data:
         ContentValues initialValues = new ContentValues();
         initialValues.put(KEY_TEXT, text);
         initialValues.put(KEY_DATE, date);
+        initialValues.put(KEY_UPDATED_AT, updatedAt);
         initialValues.put(KEY_RECIPIENTS, recipients);
         initialValues.put(KEY_FREQUENCY, frequency);
 
@@ -121,12 +125,13 @@ public class DatabaseAdapter {
     }
 
     // Change an existing row to be equal to new data.
-    public boolean updateRow(long rowId, String text, String date, String recipients, String frequency) {
+    public boolean updateRow(long rowId, String text, String date,  String updatedAt, String recipients, String frequency) {
         String where = KEY_ROWID + "=" + rowId;
         // Create row's data:
         ContentValues newValues = new ContentValues();
         newValues.put(KEY_TEXT, text);
         newValues.put(KEY_DATE, date);
+        newValues.put(KEY_UPDATED_AT, updatedAt);
         newValues.put(KEY_RECIPIENTS, recipients);
         newValues.put(KEY_FREQUENCY, frequency);
 

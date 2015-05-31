@@ -86,7 +86,7 @@ public class ScheduleTextFragment extends Fragment {
                 String date = cursor.getString(2);
                 String recipients = cursor.getString(3);
                 String frequency = cursor.getString(4);
-                messages.add(new Message(id, text, date, recipients, frequency));
+                messages.add(new Message(id, text, date, date, recipients, frequency));
             } while(cursor.moveToNext());
         }
         cursor.close();

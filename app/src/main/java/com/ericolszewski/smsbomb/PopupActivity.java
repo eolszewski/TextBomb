@@ -1,6 +1,8 @@
 package com.ericolszewski.smsbomb;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
@@ -23,8 +25,6 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
-
-import fragments.ScheduleTextFragment;
 
 /**
  * Created by ericolszewski on 5/30/15.
@@ -122,11 +122,21 @@ public class PopupActivity extends Activity implements DatePickerDialog.OnDateSe
             date = setFirstOccurrenceButton.getText().toString();
             error++;
 
-            long id = databaseAdapter.insertRow(message, date, sanitizedPhoneNumber, frequencySpinner.getSelectedItem().toString());
-            Toast.makeText(this, "Your message has been added.",
-                    Toast.LENGTH_LONG).show();
-            ScheduleTextFragment.getInstance(2);
-            finish();
+            AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+            alertDialog.setTitle("Coming Soon");
+            alertDialog.setMessage("This feature will be available by June 14th, if you'd like to make suggestions for this feature, please email me (my information can be found in the Play Store for this app).");
+            alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "OK",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+            alertDialog.show();
+//            long id = databaseAdapter.insertRow(message, date, date, sanitizedPhoneNumber, frequencySpinner.getSelectedItem().toString());
+//            Toast.makeText(this, "Your message has been added.",
+//                    Toast.LENGTH_LONG).show();
+//            ScheduleTextFragment.getInstance(2);
+//            finish();
 
         } catch (Exception e) {
             if (error == 0) {
