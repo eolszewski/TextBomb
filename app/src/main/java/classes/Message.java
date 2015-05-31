@@ -1,18 +1,17 @@
 package classes;
 
-import java.util.Date;
-import java.util.HashMap;
-
 /**
  * Created by ericolszewski on 5/27/15.
  */
 public class Message {
+    private int id;
     private String text;
-    private Date date;
-    private HashMap<String, String> recipients = new HashMap<String, String>();
+    private String date;
+    private String recipients;
     private String frequency;
 
-    public Message(String text, Date date, HashMap<String, String> recipients, String frequency) {
+    public Message(int id, String text, String date, String recipients, String frequency) {
+        this.id = id;
         this.text = text;
         this.date = date;
         this.recipients = recipients;
@@ -27,19 +26,19 @@ public class Message {
         this.text = text;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
-    public HashMap<String, String> getRecipients() {
+    public String getRecipients() {
         return recipients;
     }
 
-    public void setRecipients(HashMap<String, String> recipients) {
+    public void setRecipients(String recipients) {
         this.recipients = recipients;
     }
 

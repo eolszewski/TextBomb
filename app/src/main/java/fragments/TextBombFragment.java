@@ -62,7 +62,7 @@ public class TextBombFragment extends Fragment {
             sendSMSButton = (Button) layout.findViewById(R.id.buttonSendMessages);
             browseContactsButton = (Button) layout.findViewById(R.id.buttonBrowse);
             setIntervalButton = (Button) layout.findViewById(R.id.buttonInterval);
-            phoneNumberEditText = (EditText) layout.findViewById(R.id.editTextPhoneNumber);
+            phoneNumberEditText = (EditText) layout.findViewById(R.id.editTextRecipients);
             messageEditText = (EditText) layout.findViewById(R.id.editTextMessage);
             quantityEditText = (EditText) layout.findViewById(R.id.editTextNumber);
             intervalEditText = (EditText) layout.findViewById(R.id.editTextInterval);

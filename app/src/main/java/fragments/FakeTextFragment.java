@@ -90,7 +90,7 @@ public class FakeTextFragment extends Fragment implements DatePickerDialog.OnDat
             browseContactsButton.setOnClickListener(this);
             setDateAndTimeButton = (Button) layout.findViewById(R.id.buttonSetDateAndTime);
             setDateAndTimeButton.setOnClickListener(this);
-            phoneNumberEditText = (EditText) layout.findViewById(R.id.editTextPhoneNumber);
+            phoneNumberEditText = (EditText) layout.findViewById(R.id.editTextRecipients);
             messageEditText = (EditText) layout.findViewById(R.id.editTextMessage);
 
             inboxRadioButton = (RadioButton) layout.findViewById(R.id.radioButtonInbox);

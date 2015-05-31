@@ -1,9 +1,11 @@
 package fragments;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,11 +18,7 @@ import com.ericolszewski.smsbomb.DatabaseAdapter;
 import com.ericolszewski.smsbomb.PopupActivity;
 import com.ericolszewski.smsbomb.R;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
 
 import classes.Message;
 
@@ -30,9 +28,10 @@ import classes.Message;
 public class ScheduleTextFragment extends Fragment {
 
     //region Class Variables
-    private ArrayList<Message> messages = new ArrayList<Message>();
+    private ArrayList<Message> messages;
     private View layout;
     private LayoutInflater inflater;
+    private ListView messagesList;
     private DatabaseAdapter databaseAdapter;
     //endregion
 
@@ -50,6 +49,9 @@ public class ScheduleTextFragment extends Fragment {
         layout = inflater.inflate(R.layout.fragment_schedule_text, container, false);
         Bundle bundle = getArguments();
         if (bundle != null) {
+            databaseAdapter = new DatabaseAdapter(getActivity());
+            databaseAdapter.open();
+
             populateMessageList();
             populateListView();
             Button addSMSButton = (Button) layout.findViewById(R.id.buttonAddText);
@@ -60,47 +62,34 @@ public class ScheduleTextFragment extends Fragment {
                 }
             });
 
-            databaseAdapter = new DatabaseAdapter(getActivity());
-            databaseAdapter.open();
+            messagesList = (ListView) layout.findViewById(R.id.listView);
+            DisplayMetrics dm = new DisplayMetrics();
+            getActivity().getWindowManager().getDefaultDisplay().getMetrics(dm);
+            ViewGroup.LayoutParams params = messagesList.getLayoutParams();
+            params.height = (int)(dm.heightPixels * 0.65) - 200;
+            messagesList.setLayoutParams(params);
+            messagesList.requestLayout();
         }
 
         return layout;
     }
 
     private void populateMessageList() {
-        HashMap<String, String> hashMap= new HashMap<String, String>();
-        HashMap<String, String> hashMap1= new HashMap<String, String>();
-        HashMap<String, String> hashMap2= new HashMap<String, String>();
-        Date date = null;
-        try {
-            date = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").parse("2015-05-29 07:00:00");
-        } catch (ParseException e) {
-            e.printStackTrace();
+        messages = new ArrayList<Message>();
+        Cursor cursor  =  databaseAdapter.getAllRows();
+        String message = "!";
+
+        if (cursor.moveToFirst()) {
+            do {
+                int id = cursor.getInt(0);
+                String text = cursor.getString(1);
+                String date = cursor.getString(2);
+                String recipients = cursor.getString(3);
+                String frequency = cursor.getString(4);
+                messages.add(new Message(id, text, date, recipients, frequency));
+            } while(cursor.moveToNext());
         }
-
-        hashMap.put("Eric Olszewski", "7138258982");
-
-        messages.add(new Message("Wake Up!", date, hashMap, "Every Day"));
-
-        try {
-            date = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").parse("2015-06-01 17:00:00");
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-
-        hashMap1.put("Jake Luebeck", "7138258982");
-
-        messages.add(new Message("Take out the trash", date, hashMap1, "Every Week"));
-
-        try {
-            date = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").parse("2015-06-02 11:45:00");
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-
-        hashMap2.put("John Jacobs", "7138258982");
-
-        messages.add(new Message("Meet me at the gym in 15", date, hashMap2, "Every Other Day"));
+        cursor.close();
     }
 
     private void populateListView() {
@@ -127,13 +116,10 @@ public class ScheduleTextFragment extends Fragment {
             frequencyText.setText(currentMessage.getFrequency());
 
             TextView recipientsText = (TextView) messageView.findViewById(R.id.message_recipients);
-            recipientsText.setText(null);
-            for ( String key : currentMessage.getRecipients().keySet() ) {
-                recipientsText.append(String.format("%s ", key));
-            }
+            recipientsText.setText(currentMessage.getRecipients());
 
             TextView dateText = (TextView) messageView.findViewById(R.id.message_nextOccurrence);
-            dateText.setText(new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(currentMessage.getDate()));
+            dateText.setText(currentMessage.getDate());
 
             TextView messageText = (TextView) messageView.findViewById(R.id.message_message);
             messageText.setText(currentMessage.getText());
@@ -147,4 +133,12 @@ public class ScheduleTextFragment extends Fragment {
         super.onDestroy();
         databaseAdapter.close();
     }
+
+    @Override
+    public void onResume() {
+        populateMessageList();
+        populateListView();
+        super.onResume();
+    }
+
 }

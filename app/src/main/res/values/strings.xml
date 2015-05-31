@@ -11,7 +11,7 @@
     <string name="message_type">Select the type of message you want to fake.</string>
     <string name="number_placeholder"># of Messages</string>
     <string name="phone_number_placeholder">Phone Number</string>
-    <string name="schedule_sms_header">Coming Soon!</string>
+    <string name="schedule_sms_header">Scheduled Texts</string>
     <string name="schedule_sms_popup_header">Add / Edit Entry</string>
     <string name="schedule_sms_label">Save</string>
     <string name="send_fake_sms_header">Make whoever you want text you whatever you want!</string>

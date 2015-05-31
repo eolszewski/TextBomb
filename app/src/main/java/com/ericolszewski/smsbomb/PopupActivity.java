@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.datetimepicker.date.DatePickerDialog;
 import com.android.datetimepicker.time.RadialPickerLayout;
@@ -22,6 +23,8 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
+
+import fragments.ScheduleTextFragment;
 
 /**
  * Created by ericolszewski on 5/30/15.
@@ -33,7 +36,7 @@ public class PopupActivity extends Activity implements DatePickerDialog.OnDateSe
     private static final String TIME_PATTERN = "HH:mm";
 
     private Button scheduleSMSButton, browseContactsButton, setFirstOccurrenceButton;
-    private EditText phoneNumberEditText, messageEditText;
+    private EditText recipientsEditText, messageEditText;
     private Calendar calendar;
     private DateFormat dateFormat;
     private SimpleDateFormat timeFormat;
@@ -53,7 +56,7 @@ public class PopupActivity extends Activity implements DatePickerDialog.OnDateSe
         browseContactsButton.setOnClickListener(this);
         setFirstOccurrenceButton = (Button) findViewById(R.id.buttonSetFirstOccurrence);
         setFirstOccurrenceButton.setOnClickListener(this);
-        phoneNumberEditText = (EditText) findViewById(R.id.editTextPhoneNumber);
+        recipientsEditText = (EditText) findViewById(R.id.editTextRecipients);
         messageEditText = (EditText) findViewById(R.id.editTextMessage);
         frequencySpinner = (Spinner) findViewById(R.id.frequencySpinner);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
@@ -73,6 +76,20 @@ public class PopupActivity extends Activity implements DatePickerDialog.OnDateSe
         databaseAdapter.open();
     }
 
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.buttonSetFirstOccurrence:
+                DatePickerDialog.newInstance(this, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH)).show(this.getFragmentManager(), "datePicker");
+                break;
+            case R.id.buttonScheduleMessage:
+                scheduleMessage();
+                break;
+            case R.id.buttonBrowse:
+                selectContact();
+                break;
+        }
+    }
+
     // Launch Contact Picker
     private void selectContact()
     {
@@ -81,16 +98,47 @@ public class PopupActivity extends Activity implements DatePickerDialog.OnDateSe
         startActivityForResult(intent, REQUEST_CONTACTPICKER);
     }
 
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.buttonSetFirstOccurrence:
-                DatePickerDialog.newInstance(this, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH)).show(this.getFragmentManager(), "datePicker");
-                break;
-            case R.id.buttonAddText:
-                break;
-            case R.id.buttonBrowse:
-                selectContact();
-                break;
+    // Add Text To Database
+    private void scheduleMessage() {
+        String phoneNumber, sanitizedPhoneNumber, optionalPlus, message, date;
+        int error = 0, interval = 0;
+        String[] timeComponents;
+
+        try {
+            phoneNumber = recipientsEditText.getText().toString();
+            optionalPlus = phoneNumber.substring(0, 1);
+            sanitizedPhoneNumber = phoneNumber.replaceAll("[^\\d.]", "");
+            if (optionalPlus.equals("+")) {
+                sanitizedPhoneNumber = String.format("+%s", sanitizedPhoneNumber);
+            }
+            error++;
+
+            message = messageEditText.getText().toString();
+            if (message.length() == 0) {
+                throw new Exception("Needs to be a message here");
+            }
+            error++;
+
+            date = setFirstOccurrenceButton.getText().toString();
+            error++;
+
+            long id = databaseAdapter.insertRow(message, date, sanitizedPhoneNumber, frequencySpinner.getSelectedItem().toString());
+            Toast.makeText(this, "Your message has been added.",
+                    Toast.LENGTH_LONG).show();
+            ScheduleTextFragment.getInstance(2);
+            finish();
+
+        } catch (Exception e) {
+            if (error == 0) {
+                Toast.makeText(this, "Please input a valid phone number.",
+                        Toast.LENGTH_LONG).show();
+            } else if (error == 1) {
+                Toast.makeText(this, "Please input a message to send.",
+                        Toast.LENGTH_LONG).show();
+            } else if (error == 2) {
+                Toast.makeText(this, "Please set a time to send your first message.",
+                        Toast.LENGTH_LONG).show();
+            }
         }
     }
 
@@ -118,7 +166,7 @@ public class PopupActivity extends Activity implements DatePickerDialog.OnDateSe
             }
             if (!phoneNumber.equals(""))
             {
-                phoneNumberEditText.setText(phoneNumber, TextView.BufferType.EDITABLE);
+                recipientsEditText.setText(phoneNumber, TextView.BufferType.EDITABLE);
             }
         }
     }
