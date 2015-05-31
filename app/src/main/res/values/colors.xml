@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <drawable name="apple_blue">#FF007AFF</drawable>
+    <drawable name="white">#FFFFFFFF</drawable>
+    <drawable name="light_gray">#FFDDDDDD</drawable>
+    <drawable name="transparent_light_gray">#55DDDDDD</drawable>
+    <drawable name="shadow_gray">#CABBBBBB</drawable>
+
+</resources>

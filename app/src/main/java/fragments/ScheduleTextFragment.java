@@ -13,7 +13,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.ericolszewski.smsbomb.DatabaseAdapter;
-import com.ericolszewski.smsbomb.MessageActivity;
+import com.ericolszewski.smsbomb.PopupActivity;
 import com.ericolszewski.smsbomb.R;
 
 import java.text.ParseException;
@@ -56,12 +56,12 @@ public class ScheduleTextFragment extends Fragment {
 
             addSMSButton.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View view) {
-                    startActivity(new Intent(getActivity(), MessageActivity.class));
+                    startActivity(new Intent(getActivity(), PopupActivity.class));
                 }
             });
 
-//            databaseAdapter = new DatabaseAdapter(getActivity());
-//            databaseAdapter.open();
+            databaseAdapter = new DatabaseAdapter(getActivity());
+            databaseAdapter.open();
         }
 
         return layout;
@@ -145,6 +145,6 @@ public class ScheduleTextFragment extends Fragment {
     @Override
     public void onDestroy() {
         super.onDestroy();
-//        databaseAdapter.close();
+        databaseAdapter.close();
     }
 }

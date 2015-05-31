@@ -228,7 +228,7 @@ public class FakeTextFragment extends Fragment implements DatePickerDialog.OnDat
     //endregion
 
     //region View Methods
-    // Method for launching contact picker
+    // Launch Contact Picker
     private void selectContact()
     {
         Intent intent = new Intent(Intent.ACTION_PICK,

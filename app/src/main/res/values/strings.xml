@@ -11,18 +11,30 @@
     <string name="message_type">Select the type of message you want to fake.</string>
     <string name="number_placeholder"># of Messages</string>
     <string name="phone_number_placeholder">Phone Number</string>
-    <string name="schedule_text_header">Coming Soon!</string>
+    <string name="schedule_sms_header">Coming Soon!</string>
+    <string name="schedule_sms_popup_header">Add / Edit Entry</string>
+    <string name="schedule_sms_label">Save</string>
     <string name="send_fake_sms_header">Make whoever you want text you whatever you want!</string>
     <string name="send_fake_sms_label">Fake</string>
     <string name="send_sms_bomb_header">Send as many texts as you want to someone!</string>
     <string name="send_sms_label">Send Texts</string>
     <string name="set_date_and_time">Set Date and Time</string>
+    <string name="set_first_occurrence">Set First Occurrence</string>
     <string name="text_view_fake_message_header">The message you type above will not be sent to anyone. You will just receive it instantly on your phone. You may need to refresh your default messaging app to see the texts.</string>
 
     <string-array name="tabs">
         <item>BOMB</item>
         <item>FAKE</item>
         <item>SCHEDULE</item>
+    </string-array>
+
+    <string-array name="frequency_array">
+        <item>Once</item>
+        <item>Every Hour</item>
+        <item>Every Day</item>
+        <item>Every Week</item>
+        <item>Every Month</item>
+        <item>Every Year</item>
     </string-array>
 
 </resources>

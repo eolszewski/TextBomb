@@ -51,7 +51,7 @@
 
         <!-- Message Popup Activity -->
         <activity
-            android:name=".MessageActivity"
+            android:name=".PopupActivity"
             android:theme="@style/AppTheme.PopupTheme">
         </activity>
 

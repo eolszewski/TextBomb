@@ -1,0 +1,90 @@
+<ScrollView
+xmlns:android="http://schemas.android.com/apk/res/android"
+android:layout_width="fill_parent"
+android:layout_height="fill_parent"
+android:fillViewport="true"
+android:background="@drawable/tb_popup_background" >
+
+<LinearLayout
+    android:id="@+id/linearLayout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#FFFFFF"
+    android:orientation="vertical"
+    android:padding="@dimen/linear_layout_padding" >
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/schedule_sms_popup_header"
+        android:id="@+id/textView"
+        android:gravity="center"
+        android:layout_marginBottom="@dimen/text_view_padding_bottom" />
+
+    <LinearLayout
+        android:id="@+id/phoneNumberLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/editTextPhoneNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:inputType="phone"
+            android:background="@drawable/tb_edittext_background"
+            android:minHeight="@dimen/element_min_height"
+            android:layout_marginRight="@dimen/edit_text_margin_right"
+            android:hint="@string/phone_number_placeholder" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:text="@string/browse_label"
+            android:id="@+id/buttonBrowse"
+            android:background="@drawable/tb_button_background"
+            android:textColor="@drawable/tb_button_text_color"
+            android:minHeight="@dimen/element_min_height" />
+
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/editTextMessage"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textMultiLine"
+        android:layout_marginTop="@dimen/edit_text_margin_top"
+        android:gravity="top"
+        android:background="@drawable/tb_edittext_background"
+        android:minHeight="@dimen/element_min_height"
+        android:hint="@string/message_placeholder"
+        android:singleLine="false"
+        android:lines="4"/>
+
+    <Button android:id="@+id/buttonSetFirstOccurrence"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/set_first_occurrence"
+        android:background="@drawable/tb_button_background"
+        android:textColor="@drawable/tb_button_text_color"
+        android:layout_marginTop="@dimen/button_margin_top"/>
+
+    <Spinner
+        android:id="@+id/frequencySpinner"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spinner_margin_top" />
+
+    <Button android:id="@+id/buttonScheduleMessage"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/schedule_sms_label"
+        android:background="@drawable/tb_button_background"
+        android:textColor="@drawable/tb_button_text_color"
+        android:layout_marginTop="@dimen/button_margin_top"/>
+
+</LinearLayout>
+
+</ScrollView>

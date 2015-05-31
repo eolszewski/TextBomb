@@ -19,7 +19,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="@string/schedule_text_header"
+            android:text="@string/schedule_sms_header"
             android:id="@+id/comingSoon"
             android:gravity="center"
             android:layout_marginBottom="@dimen/text_view_padding_bottom" />

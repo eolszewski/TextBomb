@@ -8,5 +8,6 @@
     <dimen name="element_min_height">40dp</dimen>
     <dimen name="linear_layout_margin_bottom">8dp</dimen>
     <dimen name="linear_layout_padding">30dp</dimen>
+    <dimen name="spinner_margin_top">15dp</dimen>
     <dimen name="text_view_padding_bottom">15dp</dimen>
 </resources>
