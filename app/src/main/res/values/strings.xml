@@ -20,9 +20,9 @@
     <string name="text_view_fake_message_header">The message you type above will not be sent to anyone. You will just receive it instantly on your phone. You may need to refresh your default messaging app to see the texts.</string>
 
     <string-array name="tabs">
-        <item>TEXT BOMB</item>
-        <item>FAKE TEXT</item>
-        <item>SCHEDULE TEXT</item>
+        <item>BOMB</item>
+        <item>FAKE</item>
+        <item>SCHEDULE</item>
     </string-array>
 
 </resources>

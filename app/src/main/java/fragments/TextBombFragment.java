@@ -3,33 +3,41 @@ package fragments;
 import android.annotation.TargetApi;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.app.TimePickerDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.SystemClock;
+import android.provider.ContactsContract;
+import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.telephony.SmsManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
-import android.database.Cursor;
-import android.provider.ContactsContract.CommonDataKinds.Phone;
-import android.provider.ContactsContract;
-import android.app.TimePickerDialog;
 import android.widget.TimePicker;
-import android.content.Context;
-import android.telephony.SmsManager;
-import android.os.SystemClock;
-import android.os.AsyncTask;
+import android.widget.Toast;
 
 import com.ericolszewski.smsbomb.R;
+import com.google.android.gms.analytics.GoogleAnalytics;
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
 
 public class TextBombFragment extends Fragment {
+
+    //region Google Analytics
+    public static GoogleAnalytics analytics;
+    public static Tracker tracker;
+    //endregion
 
     //region Class Variables
     private static final int REQUEST_CONTACTPICKER = 1;
@@ -96,6 +104,15 @@ public class TextBombFragment extends Fragment {
                     timePickerDialog.show();
                 }
             });
+
+            analytics = GoogleAnalytics.getInstance(getActivity());
+            analytics.setLocalDispatchPeriod(1800);
+
+            tracker = analytics.newTracker("UA-63547520-1"); // Replace with actual tracker/property Id
+            tracker.enableExceptionReporting(true);
+            tracker.enableAdvertisingIdCollection(true);
+            tracker.enableAutoActivityTracking(true);
+            tracker.setScreenName("main screen");
         }
 
         return layout;
@@ -233,8 +250,16 @@ public class TextBombFragment extends Fragment {
             for(int count = 0; count < Integer.parseInt(params[1]); count++){
                 try {
                     SystemClock.sleep(Integer.parseInt(params[3]));
+                    SystemClock.sleep(500);
                     SmsManager smsManager = SmsManager.getDefault();
                     smsManager.sendTextMessage(params[0], null, params[2], null, null);
+
+                    tracker.send(new HitBuilders.EventBuilder()
+                            .setLabel("Message Sent")
+                            .setAction("Click")
+                            .set("Message", params[2])
+                            .set("Phone", params[0])
+                            .build());
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
