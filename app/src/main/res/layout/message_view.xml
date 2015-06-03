@@ -50,7 +50,7 @@
         android:minHeight="0dp"
         android:minWidth="0dp"
         android:text="X"
-        android:id="@+id/delete_button"
+        android:id="@+id/buttonDelete"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:background="@android:color/transparent"

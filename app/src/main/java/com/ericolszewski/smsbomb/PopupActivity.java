@@ -130,7 +130,7 @@ public class PopupActivity extends Activity implements DatePickerDialog.OnDateSe
 
                 long id = databaseAdapter.insertRow(message, date, date, sanitizedPhoneNumber, frequency);
                 intent.putExtra("id", Long.toString(id));
-                PendingIntent pendingIntent = PendingIntent.getService(this, 0, intent, 0);
+                PendingIntent pendingIntent = PendingIntent.getService(this, (int)id, intent, 0);
                 try {
                     alarmManager.cancel(pendingIntent);
                 } catch (Exception e) {

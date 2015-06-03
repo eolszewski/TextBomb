@@ -1,5 +1,8 @@
 package fragments;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -110,10 +113,10 @@ public class ScheduleTextFragment extends Fragment {
                 messageView = inflater.inflate(R.layout.message_view, parent, false);
             }
 
-            Message currentMessage = messages.get(position);
+            final Message currentMessage = messages.get(position);
 
             TextView frequencyText = (TextView) messageView.findViewById(R.id.message_frequency);
-            frequencyText.setText(String.format("Occurs Every: %s", currentMessage.getFrequency()));
+            frequencyText.setText(String.format("Occurs: %s", currentMessage.getFrequency()));
 
             TextView recipientsText = (TextView) messageView.findViewById(R.id.message_recipients);
             recipientsText.setText(String.format("Number: %s", currentMessage.getRecipients()));
@@ -123,6 +126,21 @@ public class ScheduleTextFragment extends Fragment {
 
             TextView messageText = (TextView) messageView.findViewById(R.id.message_message);
             messageText.setText(String.format("Message: %s", currentMessage.getText()));
+
+            Button deleteMessageButton = (Button) messageView.findViewById(R.id.buttonDelete);
+            deleteMessageButton.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View view) {
+                    Intent intent = new Intent(getActivity(), ScheduleTextFragment.class);
+                    PendingIntent pendingIntent = PendingIntent.getService(getActivity(), currentMessage.getId(), intent, 0);
+                    AlarmManager alarmManager = (AlarmManager)getActivity().getSystemService(Context.ALARM_SERVICE);
+                    alarmManager.cancel(pendingIntent);
+
+                    databaseAdapter.deleteRow(currentMessage.getId());
+
+                    populateMessageList();
+                    populateListView();
+                }
+            });
 
             return messageView;
         }
