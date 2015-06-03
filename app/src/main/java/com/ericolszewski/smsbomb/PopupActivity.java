@@ -1,7 +1,9 @@
 package com.ericolszewski.smsbomb;
 
 import android.app.Activity;
+import android.app.AlarmManager;
 import android.app.AlertDialog;
+import android.app.PendingIntent;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
@@ -25,6 +27,11 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
+
+import classes.Constants;
+import fragments.ScheduleTextFragment;
+import services.MessageService;
+import utilities.Utilities;
 
 /**
  * Created by ericolszewski on 5/30/15.
@@ -59,6 +66,7 @@ public class PopupActivity extends Activity implements DatePickerDialog.OnDateSe
         recipientsEditText = (EditText) findViewById(R.id.editTextRecipients);
         messageEditText = (EditText) findViewById(R.id.editTextMessage);
         frequencySpinner = (Spinner) findViewById(R.id.frequencySpinner);
+
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.frequency_array, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -100,28 +108,41 @@ public class PopupActivity extends Activity implements DatePickerDialog.OnDateSe
 
     // Add Text To Database
     private void scheduleMessage() {
-        String phoneNumber, sanitizedPhoneNumber, optionalPlus, message, date;
-        int error = 0, interval = 0;
-        String[] timeComponents;
+        if (Constants.beta) {
+            String phoneNumber, sanitizedPhoneNumber, message, date, frequency;
+            Calendar calendar;
 
-        try {
+            Intent intent = new Intent(this, MessageService.class);
+            AlarmManager alarmManager = (AlarmManager)getSystemService(ALARM_SERVICE);
+
             phoneNumber = recipientsEditText.getText().toString();
-            optionalPlus = phoneNumber.substring(0, 1);
-            sanitizedPhoneNumber = phoneNumber.replaceAll("[^\\d.]", "");
-            if (optionalPlus.equals("+")) {
-                sanitizedPhoneNumber = String.format("+%s", sanitizedPhoneNumber);
-            }
-            error++;
-
             message = messageEditText.getText().toString();
-            if (message.length() == 0) {
-                throw new Exception("Needs to be a message here");
-            }
-            error++;
-
             date = setFirstOccurrenceButton.getText().toString();
-            error++;
+            frequency = frequencySpinner.getSelectedItem().toString();
 
+            sanitizedPhoneNumber = Utilities.checkMessageForErrors(phoneNumber, message, date, frequency);
+            if (sanitizedPhoneNumber.substring(0, 5).equals("Error")) {
+                Toast.makeText(this, sanitizedPhoneNumber.substring(7),
+                        Toast.LENGTH_LONG).show();
+            } else {
+                calendar = Utilities.formattedTimeToCalendar(date);
+                calendar.add(Calendar.MILLISECOND, Utilities.frequencyToMilliseconds(frequency));
+
+                long id = databaseAdapter.insertRow(message, date, date, sanitizedPhoneNumber, frequency);
+                intent.putExtra("id", Long.toString(id));
+                PendingIntent pendingIntent = PendingIntent.getService(this, 0, intent, 0);
+                try {
+                    alarmManager.cancel(pendingIntent);
+                } catch (Exception e) {
+
+                }
+                Toast.makeText(this, "Your message has been added.", Toast.LENGTH_LONG).show();
+
+                alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis() - Utilities.frequencyToMilliseconds(frequency), Utilities.frequencyToMilliseconds(frequency), pendingIntent);
+                ScheduleTextFragment.getInstance(2);
+                finish();
+            }
+        } else {
             AlertDialog alertDialog = new AlertDialog.Builder(this).create();
             alertDialog.setTitle("Coming Soon");
             alertDialog.setMessage("This feature will be available by June 14th, if you'd like to make suggestions for this feature, please email me (my information can be found in the Play Store for this app).");
@@ -132,23 +153,6 @@ public class PopupActivity extends Activity implements DatePickerDialog.OnDateSe
                         }
                     });
             alertDialog.show();
-//            long id = databaseAdapter.insertRow(message, date, date, sanitizedPhoneNumber, frequencySpinner.getSelectedItem().toString());
-//            Toast.makeText(this, "Your message has been added.",
-//                    Toast.LENGTH_LONG).show();
-//            ScheduleTextFragment.getInstance(2);
-//            finish();
-
-        } catch (Exception e) {
-            if (error == 0) {
-                Toast.makeText(this, "Please input a valid phone number.",
-                        Toast.LENGTH_LONG).show();
-            } else if (error == 1) {
-                Toast.makeText(this, "Please input a message to send.",
-                        Toast.LENGTH_LONG).show();
-            } else if (error == 2) {
-                Toast.makeText(this, "Please set a time to send your first message.",
-                        Toast.LENGTH_LONG).show();
-            }
         }
     }
 

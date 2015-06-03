@@ -34,6 +34,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 
+import classes.Constants;
 import fragments.util.IabHelper;
 import fragments.util.IabResult;
 import fragments.util.Inventory;
@@ -296,7 +297,7 @@ public class FakeTextFragment extends Fragment implements DatePickerDialog.OnDat
                     DatePickerDialog.newInstance(this, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH)).show(getActivity().getFragmentManager(), "datePicker");
                     break;
                 case R.id.buttonSendMessages:
-                    if (mHasFakeTexts) {
+                    if (mHasFakeTexts || Constants.beta) {
                         final String myPackageName = getActivity().getPackageName();
                         if (!Telephony.Sms.getDefaultSmsPackage(getActivity()).equals(myPackageName)) {
 

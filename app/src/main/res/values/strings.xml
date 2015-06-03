@@ -30,6 +30,7 @@
 
     <string-array name="frequency_array">
         <item>Once</item>
+        <item>Every Minute</item>
         <item>Every Hour</item>
         <item>Every Day</item>
         <item>Every Week</item>

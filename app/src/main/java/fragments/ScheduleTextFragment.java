@@ -77,16 +77,16 @@ public class ScheduleTextFragment extends Fragment {
     private void populateMessageList() {
         messages = new ArrayList<Message>();
         Cursor cursor  =  databaseAdapter.getAllRows();
-        String message = "!";
 
         if (cursor.moveToFirst()) {
             do {
                 int id = cursor.getInt(0);
                 String text = cursor.getString(1);
                 String date = cursor.getString(2);
-                String recipients = cursor.getString(3);
-                String frequency = cursor.getString(4);
-                messages.add(new Message(id, text, date, date, recipients, frequency));
+                String updatedAt = cursor.getString(3);
+                String recipients = cursor.getString(4);
+                String frequency = cursor.getString(5);
+                messages.add(new Message(id, text, date, updatedAt, recipients, frequency));
             } while(cursor.moveToNext());
         }
         cursor.close();
@@ -113,16 +113,16 @@ public class ScheduleTextFragment extends Fragment {
             Message currentMessage = messages.get(position);
 
             TextView frequencyText = (TextView) messageView.findViewById(R.id.message_frequency);
-            frequencyText.setText(currentMessage.getFrequency());
+            frequencyText.setText(String.format("Occurs Every: %s", currentMessage.getFrequency()));
 
             TextView recipientsText = (TextView) messageView.findViewById(R.id.message_recipients);
-            recipientsText.setText(currentMessage.getRecipients());
+            recipientsText.setText(String.format("Number: %s", currentMessage.getRecipients()));
 
             TextView dateText = (TextView) messageView.findViewById(R.id.message_nextOccurrence);
-            dateText.setText(currentMessage.getDate());
+            dateText.setText(String.format("First Occurrence: %s", currentMessage.getDate()));
 
             TextView messageText = (TextView) messageView.findViewById(R.id.message_message);
-            messageText.setText(currentMessage.getText());
+            messageText.setText(String.format("Message: %s", currentMessage.getText()));
 
             return messageView;
         }
