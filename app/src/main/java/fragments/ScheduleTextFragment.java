@@ -24,6 +24,7 @@ import com.ericolszewski.smsbomb.R;
 import java.util.ArrayList;
 
 import classes.Message;
+import services.MessageService;
 
 /**
  * Created by ericolszewski on 5/27/15.
@@ -130,7 +131,7 @@ public class ScheduleTextFragment extends Fragment {
             Button deleteMessageButton = (Button) messageView.findViewById(R.id.buttonDelete);
             deleteMessageButton.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View view) {
-                    Intent intent = new Intent(getActivity(), ScheduleTextFragment.class);
+                    Intent intent = new Intent(getActivity(), MessageService.class);
                     PendingIntent pendingIntent = PendingIntent.getService(getActivity(), currentMessage.getId(), intent, 0);
                     AlarmManager alarmManager = (AlarmManager)getActivity().getSystemService(Context.ALARM_SERVICE);
                     alarmManager.cancel(pendingIntent);
