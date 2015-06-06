@@ -6,7 +6,9 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:layout_gravity="bottom"
-    tools:context="com.ericolszewski.smsbomb.MainActivity">
+    tools:context="com.ericolszewski.smsbomb.MainActivity"
+    android:descendantFocusability="beforeDescendants"
+    android:focusableInTouchMode="true">
 
     <it.neokree.materialtabs.MaterialTabHost
         android:id="@+id/materialTabHost"

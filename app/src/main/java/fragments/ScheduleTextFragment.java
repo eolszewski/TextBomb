@@ -128,7 +128,7 @@ public class ScheduleTextFragment extends Fragment {
             recipientsText.setText(recipients.trim());
 
             TextView dateText = (TextView) messageView.findViewById(R.id.message_nextOccurrence);
-            dateText.setText(String.format("First Occurrence: %s", currentMessage.getDate()));
+            dateText.setText(String.format("Next Occurrence: %s", currentMessage.getUpdatedAt()));
 
             TextView messageText = (TextView) messageView.findViewById(R.id.message_message);
             messageText.setText(String.format("Message: %s", currentMessage.getText()));

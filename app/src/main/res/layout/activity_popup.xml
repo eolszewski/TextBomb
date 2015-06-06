@@ -11,7 +11,9 @@ android:background="@drawable/tb_popup_background" >
     android:layout_height="wrap_content"
     android:background="#FFFFFF"
     android:orientation="vertical"
-    android:padding="@dimen/linear_layout_padding" >
+    android:padding="@dimen/linear_layout_padding"
+    android:focusable="true"
+    android:focusableInTouchMode="true">
 
     <TextView
         android:id="@+id/textView"
@@ -67,7 +69,7 @@ android:background="@drawable/tb_popup_background" >
             android:id="@+id/textView2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_weight="2"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="@string/interval_placeholder"
             android:layout_marginTop="@dimen/text_view_margin_top"
@@ -80,7 +82,7 @@ android:background="@drawable/tb_popup_background" >
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/spinner_margin_top"
-            android:layout_weight="1" />
+            android:layout_weight="3" />
 
     </LinearLayout>
 
