@@ -3,6 +3,7 @@ package utilities;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Locale;
 
@@ -52,16 +53,13 @@ public class Utilities {
         return dateFormat.format(calendar.getTime()) + " " + timeFormat.format(calendar.getTime());
     }
 
-    public static String checkMessageForErrors (String phoneNumber, String message, String date, String frequency){
-        String sanitizedPhoneNumber, optionalPlus;
+    public static String checkMessageForErrors (ArrayList<String> recipients, String message, String date, String frequency){
 
         int error = 0;
 
         try {
-            optionalPlus = phoneNumber.substring(0, 1);
-            sanitizedPhoneNumber = phoneNumber.replaceAll("[^\\d.]", "");
-            if (optionalPlus.equals("+")) {
-                sanitizedPhoneNumber = String.format("+%s", sanitizedPhoneNumber);
+            if (recipients.size() == 0){
+                throw new Exception("Please add a recipient");
             }
             error++;
 
@@ -75,11 +73,11 @@ public class Utilities {
             }
             error++;
 
-            return sanitizedPhoneNumber;
+            return "No Error";
         } catch (Exception e) {
             switch (error) {
                 case 0:
-                    return "Error: Please input a valid phone number.";
+                    return "Error: Please add a recipient.";
                 case 1:
                     return "Error: Please input a message to send.";
                 case 2:

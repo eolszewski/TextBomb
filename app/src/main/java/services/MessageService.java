@@ -45,7 +45,11 @@ public class MessageService extends Service {
         String recipients = cursor.getString(4);
         String frequency = cursor.getString(5);
 
-        new SendMessagesTask().execute(recipients, text);
+        for (String number : recipients.split("<SpecialPickleberrySpacer>"))
+        {
+            String cheese = number.split("<SpecialPickleberryDivider>")[1];
+            new SendMessagesTask().execute(number.split("<SpecialPickleberryDivider>")[1], text);
+        }
 
         Calendar calendar = Utilities.formattedTimeToCalendar(updatedAt);
         calendar.add(Calendar.MILLISECOND, Utilities.frequencyToMilliseconds(frequency));

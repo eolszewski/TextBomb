@@ -120,7 +120,12 @@ public class ScheduleTextFragment extends Fragment {
             frequencyText.setText(String.format("Occurs: %s", currentMessage.getFrequency()));
 
             TextView recipientsText = (TextView) messageView.findViewById(R.id.message_recipients);
-            recipientsText.setText(String.format("Number: %s", currentMessage.getRecipients()));
+            String recipients = "";
+            for (String number : currentMessage.getRecipients().split("<SpecialPickleberrySpacer>"))
+            {
+                recipients += String.format("%s (%s)\n", number.split("<SpecialPickleberryDivider>")[0], number.split("<SpecialPickleberryDivider>")[1]);
+            }
+            recipientsText.setText(recipients.trim());
 
             TextView dateText = (TextView) messageView.findViewById(R.id.message_nextOccurrence);
             dateText.setText(String.format("First Occurrence: %s", currentMessage.getDate()));

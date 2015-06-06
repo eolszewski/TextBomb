@@ -3,6 +3,7 @@
 
     <string name="action_settings">Settings</string>
     <string name="add_sms_label">Add Text</string>
+    <string name="add_recipient_label">Add Recipient</string>
     <string name="app_name">Text Bomb</string>
     <string name="browse_label">Contacts</string>
     <string name="interval_label">Set Frequency</string>
